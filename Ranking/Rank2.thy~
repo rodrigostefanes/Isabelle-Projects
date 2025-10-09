@@ -1,0 +1,32 @@
+theory Rank2
+
+imports Main "HOL-Library.FuncSet" HOL.List
+
+begin
+
+fun rank :: "nat \<Rightarrow> nat list \<Rightarrow> nat" where
+"rank  d [] = 0"
+|
+"rank  d (x#xs) = x*d^(length xs)+rank d xs"
+
+definition cond_rank :: "nat \<Rightarrow> nat list \<Rightarrow> bool" where
+  "cond_rank d xs \<equiv> (\<forall> i. ( i< length xs \<longrightarrow> (xs! i <d)) )\<and> d>1"
+
+lemma rank_image2 : "(cond_rank d xs) \<Longrightarrow> ((rank d xs) < d^(length xs))"
+proof (induction xs)
+  case Nil
+  then show ?case
+    by (simp add: cond_rank_def)
+next
+  case (Cons a xs)
+  then show ?case
+    by sledgehammer
+
+
+
+  
+ 
+
+
+
+end
