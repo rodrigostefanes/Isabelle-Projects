@@ -5,9 +5,6 @@ imports Main "HOL-Library.FuncSet" HOL.List
 begin
 
 
-
-
-
 fun rank :: "nat \<Rightarrow> nat list \<Rightarrow> nat" where
 "rank  d [] = 0"
 |
@@ -15,6 +12,8 @@ fun rank :: "nat \<Rightarrow> nat list \<Rightarrow> nat" where
 
 definition cond_rank :: "nat \<Rightarrow> nat list \<Rightarrow> bool" where
   "cond_rank d xs \<equiv> (\<forall> i. ( i< length xs \<longrightarrow> (xs! i <d)) )\<and> d>1"
+
+value "rank 5 [1,3,4,2,2,2,1]"
 
 lemma rank_image [simp]: "(cond_rank d xs) \<Longrightarrow> ((rank d xs) < d^(length xs))"
 proof (induction xs arbitrary: d)
@@ -44,14 +43,26 @@ qed
 fun unrank :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> nat list" where 
   "unrank 0 d k = Nil"
 |
-"unrank (Suc n) d k = (unrank n d (k div d)) @ [k mod d]"
+"unrank (Suc n) d k =  (unrank n d (k div d)) @ [k mod d]"
 
 
 definition cond_unrank :: " nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> bool" where
   "cond_unrank n d k \<equiv> (k< (d^n))\<and> d> 1"
+
+value "unrank 7 5 23491"
+
+(*Now let us prove that the rank and unrank are inverse of each other*)
+
+
  
 theorem unrank_rank_inverse : "(cond_rank d xs) \<Longrightarrow>  (unrank (length xs) d (rank d xs) = xs)"
-  sledgehammer
+proof (induction xs arbitrary: d)
+  case Nil
+  then show ?case by auto
+next
+  case (Cons a xs)
+  then show ?case
+  proof - 
 
 
 end
