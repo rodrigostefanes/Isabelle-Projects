@@ -1,6 +1,6 @@
-theory Rank3
+theory Rankpaper
 
-imports Main "HOL-Library.FuncSet" HOL.List
+imports Main "HOL-Library.FuncSet" HOL.List HOL.Vector_Spaces
 
 begin
 
@@ -33,6 +33,11 @@ value "unrank 7 5 23491"
 (************************ Lemmas ************************)
 
 (*The image of the rank falls in the domain of unrank when we have the condition being true*)
+
+(*lemma rank_image : "(cond_rank d xs) \<Longrightarrow> (cond_unrank (length xs) d (rank d xs))"
+  try0*)
+
+
 lemma rank_image : "(cond_rank d xs) \<Longrightarrow> ((rank d xs) \<le> (d^(length xs))-1)"
 proof (induction xs arbitrary: d)
   case Nil
@@ -124,6 +129,12 @@ next
     show ?thesis using 2 and 9 by simp
   qed
 qed
+
+(******************************************* Paper *******************************************)
+
+
+
+
 
 
 end
