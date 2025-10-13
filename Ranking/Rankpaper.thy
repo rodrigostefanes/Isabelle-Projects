@@ -108,7 +108,6 @@ qed
 
 (************************ Theorems ************************)
 
-
 theorem unrank_rank_inverse : "(cond_rank d xs) \<Longrightarrow>  (cond_unrank (length xs) d (rank d xs))\<and>(unrank (length xs) d (rank d xs) = xs)"
 proof (induction xs arbitrary: d)
   case Nil
@@ -131,6 +130,31 @@ next
 qed
 
 (******************************************* Paper *******************************************)
+
+locale vector_space =
+  fixes V :: "nat list set"
+  fixes S :: "nat list set" 
+  fixes n :: nat
+  fixes i :: nat
+  fixes q :: nat
+  assumes dim_V : "dim V=n"
+  assumes q_gr : "q>1"
+  assumes F_q : "\<forall> v. (v\<in> V \<longrightarrow> (\<forall> j. v!j<q))"
+  assumes F_n : "\<forall> v.(v\<in> V \<longrightarrow> length v = n)"
+  assumes S_LI : "independent S"
+  assumes S_sub : "S\<subseteq>V"
+  assumes S_card : "card S = i"
+begin
+
+fun unrankpap :: "nat \<Rightarrow> nat list" where
+"unrank 0 = Nil"
+|
+"unrank (Suc k) ="
+
+lemma "dim V =n" using dim_V by simp
+
+end
+
 
 
 fun unrankpap :: "nat \<Rightarrow> nat \<Rightarrow> nat list list \<Rightarrow> nat \<Rightarrow> nat list" where
