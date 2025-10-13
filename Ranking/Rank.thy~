@@ -1,6 +1,6 @@
-theory Rankpaper
+theory Rank
 
-imports Main "HOL-Library.FuncSet" HOL.List HOL.Vector_Spaces
+imports Main "HOL-Library.FuncSet" HOL.List
 
 begin
 
@@ -130,16 +130,5 @@ next
   qed
 qed
 
-(******************************************* Paper *******************************************)
-
-
-fun unrankpap :: "nat \<Rightarrow> nat \<Rightarrow> nat list list \<Rightarrow> nat \<Rightarrow> nat list" where
-"unrankpap 0 q ys k = Nil"
-|
-"unrankpap (Suc n) q ys k = (((unrank (length ys) q (k mod q^(length ys)))!(Suc n))*((unrank ((Suc n)-(length ys)) q ((k div q^(length ys))+1))!(Suc n)) )# (unrankpap n q ys k)" 
-
-
-
-                                     
 
 end

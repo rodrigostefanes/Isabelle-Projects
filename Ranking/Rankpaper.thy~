@@ -138,8 +138,7 @@ fun unrankpap :: "nat \<Rightarrow> nat \<Rightarrow> nat list list \<Rightarrow
 |
 "unrankpap (Suc n) q ys k = (((unrank (length ys) q (k mod q^(length ys)))!(Suc n))*((unrank ((Suc n)-(length ys)) q ((k div q^(length ys))+1))!(Suc n)) )# (unrankpap n q ys k)" 
 
-
-
+value "unrank 3 4 [[1,0,0], [0,1,0],[0,0,1]] 2"
                                      
 
 end
