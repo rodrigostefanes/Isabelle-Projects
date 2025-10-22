@@ -131,6 +131,27 @@ qed
 
 (******************************************* Paper *******************************************)
 
+(*Let us now define the rank and unrank for a restriction of the full space*)
+
+
+
+definition rankk :: "nat \<Rightarrow> nat \<Rightarrow> nat list \<Rightarrow> nat" where
+"rankk i d xs = (rank d xs)-d^i"
+
+
+definition cond_rankk :: "nat \<Rightarrow> nat \<Rightarrow> nat list \<Rightarrow> bool" where
+  "cond_rankk i d xs \<equiv> (cond_rank d xs)\<and>((rank d xs)\<ge>d^i) "
+
+
+definition unrankk :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> nat list" where
+"unrankk i n d k = unrank n d (k+d^i)"
+
+definition cond_unrankk :: " nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> bool" where
+  "cond_unrankk i n d k \<equiv> (cond_unrank n d (k+d^i))"
+
+value "unrank 7 5 23491"
+
+
 locale vector_space =
   fixes V :: "nat list set"
   fixes S :: "nat list set" 
@@ -145,15 +166,6 @@ locale vector_space =
   assumes S_sub : "S\<subseteq>V"
   assumes S_card : "card S = i"
 begin
-
-fun unrankpap :: "nat \<Rightarrow> nat list" where
-"unrank 0 = Nil"
-|
-"unrank (Suc k) ="
-
-lemma "dim V =n" using dim_V by simp
-
-end
 
 
 
